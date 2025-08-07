@@ -77,6 +77,8 @@ return [
         'transaction_updated_text' => 'La transacción ha sido actualizada exitosamente.',
         'transaction_cancelled_by_user_title' => 'Transacción Cancelada',
         'transaction_cancelled_by_user_text' => ':  ha cancelado la transacción. Serás redirigido.',
+        'status_updated_title' => 'Estado Actualizado',
+        'status_updated_text' => 'El estado de la transacción ahora es: :status',
     ],
     'transaction_details' => [
         'page_title' => 'Detalles de la Transacción',
@@ -302,6 +304,21 @@ return [
     'privacy' => 'Privacidad',
     'copyright' => 'DeltaScrow. Todos los derechos reservados.',
 ],
+'email' => [
+        'payment_sent_subject' => '¡Tu pago ha sido enviado!',
+        'payment_processed_title' => '¡Pago Procesado!',
+        'greeting' => 'Hola :name,',
+        'payment_processed_intro' => 'Buenas noticias. El pago correspondiente a la transacción ":title" ha sido procesado y enviado por nuestro equipo.',
+        'payment_breakdown' => 'A continuación, te mostramos el desglose de tu pago:',
+        'original_amount' => 'Monto original de la transacción:',
+        'service_fee' => 'Comisión de servicio (15%):',
+        'total_deposited' => 'Total depositado en tu cuenta:',
+        'payment_sent_outro' => 'El dinero ha sido enviado a tu método de pago registrado. Los tiempos de procesamiento pueden variar.',
+        'view_transaction_button' => 'Ver Transacción',
+        'thank_you' => 'Gracias por confiar en DeltaScrow.',
+        'regards' => 'Saludos,',
+        'team' => 'El equipo de :app_name',
+    ],
     'benefits' => [
         'title' => 'Beneficios de DeltaScrow',
         'subtitle' => 'Protección completa para compradores y vendedores',
@@ -389,6 +406,10 @@ return [
         'actions' => 'Acciones',
         'view_button' => 'Ver',
         'no_recent' => 'No hay transacciones recientes.',
+        'transaction' => 'Transacción',
+    ],
+    'chat' => [
+        'attachment' => 'Archivo adjunto',
     ],
     'statuses' => [
         'pending' => 'Pendiente',

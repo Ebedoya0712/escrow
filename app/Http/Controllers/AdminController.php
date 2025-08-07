@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PaymentSent;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -49,13 +50,21 @@ class AdminController extends Controller
 
         $transaction->update(['status' => $validated['status']]);
 
-        // Transmitir el evento de actualización de estado a todos en el canal del chat
-        broadcast(new TransactionStatusUpdated($transaction->fresh()))->toOthers();
+        broadcast(new \App\Events\TransactionStatusUpdated($transaction->fresh()))->toOthers();
 
         if ($validated['status'] === 'completed') {
             $seller = $transaction->participants()->wherePivot('role', 'seller')->first();
-            if ($seller) {
+            
+            if ($seller && $seller->email) {
+                // Guardamos el idioma actual y lo cambiamos al del vendedor
+                $currentLocale = App::getLocale();
+                App::setLocale($seller->locale ?? 'en');
+
+                // Enviamos el correo (ahora se generará en el idioma del vendedor)
                 Mail::to($seller->email)->send(new PaymentSent($transaction));
+
+                // Restauramos el idioma original
+                App::setLocale($currentLocale);
             }
         }
 

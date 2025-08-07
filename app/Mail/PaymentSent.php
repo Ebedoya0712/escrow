@@ -30,7 +30,7 @@
         public function envelope(): Envelope
         {
             return new Envelope(
-                subject: '¡Pago Enviado! - Transacción #' . $this->transaction->id,
+                subject: __('messages.email.payment_sent_subject') . ' - ' . __('messages.table.transaction') . ' #' . $this->transaction->id,
             );
         }
 

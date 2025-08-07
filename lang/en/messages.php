@@ -75,6 +75,8 @@ return [
         'ok_button' => 'Got it!',
         'transaction_updated_title' => 'Updated!',
         'transaction_updated_text' => 'The transaction has been updated successfully.',
+        'status_updated_title' => 'Status Updated',
+        'status_updated_text' => 'The transaction status is now: :status',
     ],
     'transaction_details' => [
         'page_title' => 'Transaction Details',
@@ -378,6 +380,21 @@ return [
     'privacy' => 'Privacy',
     'copyright' => 'DeltaScrow. All rights reserved.',
 ],
+'email' => [
+        'payment_sent_subject' => 'Your Payment Has Been Sent!',
+        'payment_processed_title' => 'Payment Processed!',
+        'greeting' => 'Hello :name,',
+        'payment_processed_intro' => 'Good news. The payment for the transaction ":title" has been processed and sent by our team.',
+        'payment_breakdown' => 'Below is the breakdown of your payment:',
+        'original_amount' => 'Original transaction amount:',
+        'service_fee' => 'Service fee (15%):',
+        'total_deposited' => 'Total deposited to your account:',
+        'payment_sent_outro' => 'The money has been sent to your registered payment method. Processing times may vary.',
+        'view_transaction_button' => 'View Transaction',
+        'thank_you' => 'Thank you for trusting DeltaScrow.',
+        'regards' => 'Regards,',
+        'team' => 'The :app_name Team',
+    ],
     'table' => [
         'id' => 'ID',
         'title' => 'Title',
@@ -387,6 +404,10 @@ return [
         'actions' => 'Actions',
         'view_button' => 'View',
         'no_recent' => 'No recent transactions.',
+        'transaction' => 'Transaction',
+    ],
+    'chat' => [
+        'attachment' => 'Attachment',
     ],
     'statuses' => [
         'pending' => 'Pending',

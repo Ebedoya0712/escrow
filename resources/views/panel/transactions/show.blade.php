@@ -288,15 +288,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         chatChannel.listen('.status-updated', (e) => {
-            const newStatus = e.transaction.status.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            document.getElementById('status-badge').textContent = newStatus;
-            Swal.fire({
-                icon: 'info', title: 'Estado Actualizado',
-                text: `El estado de la transacción ahora es: ${newStatus}`,
-                toast: true, position: 'top-end',
-                showConfirmButton: false, timer: 4000
-            });
-        });
+    const newStatus = e.transaction.status.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    document.getElementById('status-badge').textContent = newStatus;
+    
+    Swal.fire({
+        icon: 'info',
+        title: window.translations.status_updated_title || 'Estado Actualizado',
+        text: (window.translations.status_updated_text || 'El estado de la transacción ahora es: :status').replace(':status', newStatus),
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+    });
+});
 
         chatChannel.listen('.transaction-cancelled', (e) => {
             const redirectUrl = "{{ Auth::user()->role === 'admin' ? route('admin.transactions.index') : route('transacciones.index') }}";

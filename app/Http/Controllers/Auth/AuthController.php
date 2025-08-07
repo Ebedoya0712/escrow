@@ -13,6 +13,7 @@ class AuthController extends Controller
     /**
      * Muestra la vista del formulario de registro.
      */
+    
     public function showRegistrationForm()
     {
         return view('auth.register');
@@ -41,7 +42,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('status', '¡Tu cuenta ha sido creada exitosamente!');
     }
 
-    /**
+    /** 
      * Muestra la vista del formulario de inicio de sesión.
      */
     public function showLoginForm()

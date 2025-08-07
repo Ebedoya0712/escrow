@@ -21,6 +21,15 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'storeLogin']);
+
+    // Muestra el formulario para pedir el enlace de reseteo
+    Route::get('forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
+    // Envía el enlace de reseteo por correo
+    Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+    // Muestra el formulario para resetear la contraseña (con el token)
+    Route::get('reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+    // Procesa el cambio de contraseña
+    Route::post('reset-password', [AuthController::class, 'updatePassword'])->name('password.update');
 });
 
 
