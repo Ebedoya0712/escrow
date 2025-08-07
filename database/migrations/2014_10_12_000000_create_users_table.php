@@ -1,4 +1,6 @@
 <?php
+// ARCHIVO: database/migrations/xxxx_xx_xx_xxxxxx_create_users_table.php
+// Este archivo ya existe. Solo tienes que modificarlo para añadir la columna 'role'.
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // --- AÑADIR ESTA LÍNEA ---
+            $table->enum('role', ['user', 'admin'])->default('user'); // Define el rol del usuario en el sistema
+            // -------------------------
             $table->rememberToken();
             $table->timestamps();
         });

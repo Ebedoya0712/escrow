@@ -1,0 +1,13 @@
+/* Importar los estilos de Bootstrap */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Importar los estilos de Font Awesome */
+/*@import '@fortawesome/fontawesome-free/css/all.min.css';*/
+
+/* Importar los estilos de DataTables para Bootstrap 5 */
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+
+/* Importar los estilos de AdminLTE */
+@import 'admin-lte/dist/css/adminlte.min.css';
+
+/* Aquí puedes añadir tus propios estilos personalizados si lo necesitas */

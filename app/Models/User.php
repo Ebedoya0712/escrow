@@ -1,16 +1,16 @@
 <?php
+// ARCHIVO: app/Models/User.php
+// Este modelo ya existe, solo necesitas actualizarlo con las relaciones y el campo 'role'.
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Añadir 'role' para que se pueda asignar masivamente.
     ];
 
     /**
@@ -42,4 +43,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relación: Un usuario participa en muchas transacciones.
+     * Se usa una tabla pivote (transaction_user) para definir esta relación.
+     */
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class)->withPivot('role')->withTimestamps();
+    }
+
+    /**
+     * Relación: Un usuario puede enviar muchos mensajes.
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function paymentMethods()
+        {
+            return $this->hasMany(UserPaymentMethod::class);
+        }
 }
