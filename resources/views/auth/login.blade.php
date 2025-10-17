@@ -52,16 +52,25 @@
         .form-section {
             padding: 3rem;
         }
+        .form-label {
+            color: #374151;
+            font-weight: 600;
+        }
         .form-control {
             border: 2px solid #e5e7eb;
             border-radius: 10px;
             padding: 12px 16px;
             transition: all 0.3s ease;
             background: #f9fafb;
+            color: #374151;
+        }
+        .form-control::placeholder {
+            color: #9ca3af;
         }
         .form-control:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            background: white;
         }
         .btn-submit {
             background: var(--primary-color);
@@ -71,11 +80,53 @@
             font-weight: 600;
             transition: all 0.3s ease;
             width: 100%;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-        .btn-submit:hover {
+        .btn-submit:hover:not(:disabled) {
             background: var(--secondary-color);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+        .btn-submit:disabled {
+            background: var(--secondary-color);
+            opacity: 0.8;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .text-muted {
+            color: #6b7280 !important;
+        }
+        .form-check-label {
+            color: #374151;
+        }
+        .alert-danger {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .btn-submit.loading .loading-spinner {
+            display: block;
+        }
+        .btn-submit.loading .btn-text {
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         @media (max-width: 991px) {
             .brand-section {
@@ -93,7 +144,7 @@
                     <div class="col-lg-7">
                         <div class="form-section">
                             <div class="text-center mb-4">
-                                <h3 class="fw-bold mb-2">{{ __('messages.auth.login.welcome') }}</h3>
+                                <h3 class="fw-bold mb-2" style="color: #1f2937;">{{ __('messages.auth.login.welcome') }}</h3>
                                 <p class="text-muted">{{ __('messages.auth.login.subtitle') }}</p>
                             </div>
 
@@ -107,15 +158,15 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('login') }}" method="POST">
+                            <form action="{{ route('login') }}" method="POST" id="loginForm">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="email" class="form-label fw-bold">{{ __('messages.auth.login.email') }}</label>
-                                    <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}">
+                                    <label for="email" class="form-label">{{ __('messages.auth.login.email') }}</label>
+                                    <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}" placeholder="email@example.com">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label fw-bold">{{ __('messages.auth.login.password') }}</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <label for="password" class="form-label">{{ __('messages.auth.login.password') }}</label>
+                                    <input type="password" class="form-control" id="password" name="password" required placeholder="••••••••">
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div class="form-check">
@@ -126,8 +177,11 @@
                                         {{ __('messages.auth.login.forgot_password') }}
                                     </a>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-submit btn-lg">
-                                    <i class="fas fa-sign-in-alt me-2"></i>{{ __('messages.auth.login.submit') }}
+                                <button type="submit" class="btn btn-primary btn-submit btn-lg" id="submitBtn">
+                                    <div class="loading-spinner"></div>
+                                    <span class="btn-text">
+                                        <i class="fas fa-sign-in-alt me-2"></i>{{ __('messages.auth.login.submit') }}
+                                    </span>
                                 </button>
                                 <div class="text-center mt-4">
                                     <p class="text-muted">
@@ -157,6 +211,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            loginForm.addEventListener('submit', function(e) {
+                // Validar formulario antes de mostrar loading
+                if (this.checkValidity()) {
+                    // Mostrar estado de loading
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('loading');
+                    
+                    // Opcional: Simular un tiempo mínimo de loading para mejor UX
+                    setTimeout(() => {
+                        // El formulario se enviará automáticamente después de esta función
+                    }, 500);
+                }
+            });
+
             @if (session('status'))
                 Swal.fire({
                     title: '{{ __("messages.auth.alerts.register_success") }}',
@@ -165,6 +236,14 @@
                     confirmButtonText: '{{ __("messages.auth.alerts.great") }}',
                     confirmButtonColor: '#3b82f6'
                 });
+            @endif
+
+            // Opcional: Resetear el botón si hay errores de validación del servidor
+            @if ($errors->any())
+                if (submitBtn.classList.contains('loading')) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('loading');
+                }
             @endif
         });
     </script>

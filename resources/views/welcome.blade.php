@@ -199,25 +199,25 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-shield-alt me-2"></i>DeltaScrow
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#como-funciona">{{ __('messages.landing.navbar.how_it_works') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#beneficios">{{ __('messages.landing.navbar.benefits') }}</a></li>
+    <div class="container">
+        <a class="navbar-brand" href="#" style="display: flex; align-items: center; gap: 0;">
+            <img src="{{ asset('images/deltalogo.svg') }}" alt="DeltaScrow Logo" style="height: 65px;"><span style="color: #1b80c0; margin-left: -16px;">DeltaScrow</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#como-funciona">{{ __('messages.landing.navbar.how_it_works') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#beneficios">{{ __('messages.landing.navbar.benefits') }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#seguridad">{{ __('messages.landing.navbar.security') }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#faq">{{ __('messages.landing.navbar.faq') }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contacto">{{ __('messages.landing.navbar.contact') }}</a></li>
-                    <li class="nav-item"><a class="btn btn-primary ms-2" href="{{ route('register') }}">{{ __('messages.landing.navbar.get_started') }}</a></li>
-                </ul>
-            </div>
+                <li class="nav-item"><a class="btn btn-primary ms-2" href="{{ route('register') }}">{{ __('messages.landing.navbar.get_started') }}</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -257,7 +257,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="stat-item">
-                        <span class="stat-number" data-count="1000">0</span>
+                        <span class="stat-number" data-count="6500">0</span>
                         <p class="text-muted">{{ __('messages.landing.stats.transactions') }}</p>
                     </div>
                 </div>
